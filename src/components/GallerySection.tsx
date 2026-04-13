@@ -1,20 +1,21 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import gallery1 from "@/assets/gallery-3.png";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-1.png";
-import studentsImg from "@/assets/students-planting.jpg";
-import gallery_4 from "@/assets/gallery_4.jpg"; // UNCOMMENT THIS ONCE FILE IS ADDED
+import React, { useRef } from "react";
+import gallery1 from "@/assets/gallery-3.webp";
+import gallery2 from "@/assets/gallery-2.webp";
+import gallery3 from "@/assets/gallery-1.webp";
+import studentsImg from "@/assets/students-planting.webp";
+import gallery_4 from "@/assets/gallery_4.webp";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
 const images = [
   { src: gallery1, alt: "Terraced green hills of Nepal", span: "sm:col-span-2 sm:row-span-2" },
   { src: gallery2, alt: "Hands planting a seedling", span: "" },
   { src: gallery3, alt: "Students rallying for climate action", span: "" },
   { src: studentsImg, alt: "Students planting trees together", span: "sm:col-span-2" },
-  { src: gallery_4, alt: "Digital expert earth day 10207040", span: "" }, // UNCOMMENT THIS ONCE FILE IS ADDED
+  { src: gallery_4, alt: "Digital expert earth day 10207040", span: "" },
 ];
 
-const GallerySection = () => {
+const GallerySection = React.memo(() => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -44,10 +45,10 @@ const GallerySection = () => {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className={`rounded-2xl overflow-hidden group ${img.span}`}
             >
-              <img
+              <OptimizedImage
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
+                wrapperClassName="w-full h-full"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </motion.div>
@@ -56,6 +57,7 @@ const GallerySection = () => {
       </div>
     </section>
   );
-};
+});
 
+GallerySection.displayName = "GallerySection";
 export default GallerySection;

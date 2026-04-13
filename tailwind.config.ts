@@ -88,9 +88,9 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
-        "slow-zoom": {
-          "0%": { transform: "scale(1)" },
-          "100%": { transform: "scale(1.1)" },
+        "ken-burns": {
+          "0%": { transform: "scale(1) translate(0, 0)" },
+          "100%": { transform: "scale(1.08) translate(-1%, -1%)" },
         },
         "float": {
           "0%, 100%": { transform: "translateY(0)" },
@@ -106,7 +106,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.8s ease-out forwards",
         "fade-in": "fade-in 1s ease-out forwards",
-        "slow-zoom": "slow-zoom 20s ease-in-out infinite alternate",
+        "ken-burns": "ken-burns 40s ease-out forwards",
         "float": "float 6s ease-in-out infinite",
         "count-up": "count-up 0.6s ease-out forwards",
       },

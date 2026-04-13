@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -10,7 +11,7 @@ const navLinks = [
   { href: "#gallery", label: "Gallery" },
 ];
 
-const Navbar = () => {
+const Navbar = React.memo(() => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -30,7 +31,11 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6">
         <a href="#" className="flex items-center gap-2 group">
-          <img src="/logo.png" alt="EHH Logo" className="h-12 sm:h-16 w-auto object-contain hover:scale-105 transition-transform duration-300" />
+          <OptimizedImage
+            src="/logo.webp"
+            alt="EHH Logo"
+            className="h-12 sm:h-16 w-auto object-contain hover:scale-105 transition-transform duration-300"
+          />
         </a>
 
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
@@ -98,6 +103,7 @@ const Navbar = () => {
       </AnimatePresence>
     </nav>
   );
-};
+});
 
+Navbar.displayName = "Navbar";
 export default Navbar;

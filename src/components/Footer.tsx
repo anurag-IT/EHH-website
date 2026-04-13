@@ -1,13 +1,18 @@
+import React from "react";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
-
-const Footer = () => {
+const Footer = React.memo(() => {
   return (
     <footer className="bg-foreground text-primary-foreground/80 py-12 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 mb-10 sm:mb-12">
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <img src="/logo.png" alt="EHH Logo" className="h-16 sm:h-20 w-auto object-contain" />
+              <OptimizedImage
+                src="/logo.webp"
+                alt="EHH Logo"
+                className="h-16 sm:h-20 w-auto object-contain"
+              />
             </div>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
               Earth for Human and Humanity — a youth-led movement
@@ -59,6 +64,7 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
 
+Footer.displayName = "Footer";
 export default Footer;

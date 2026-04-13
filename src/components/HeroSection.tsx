@@ -1,16 +1,19 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Heart } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import React from "react";
+import heroBg from "@/assets/hero-bg.webp";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
-const HeroSection = () => {
+const HeroSection = React.memo(() => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0">
-        <img
+      <div className="absolute inset-0 bg-background/5">
+        <OptimizedImage
           src={heroBg}
           alt="Nepal Himalayan landscape with students and nature"
-          className="w-full h-full object-cover animate-slow-zoom"
+          wrapperClassName="absolute inset-0 w-full h-full"
+          className="w-full h-full object-cover animate-ken-burns origin-bottom-right"
           width={1920}
           height={1080}
         />
@@ -78,6 +81,7 @@ const HeroSection = () => {
       </motion.div>
     </section>
   );
-};
+});
 
+HeroSection.displayName = "HeroSection";
 export default HeroSection;
