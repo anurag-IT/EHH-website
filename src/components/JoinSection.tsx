@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Heart } from "lucide-react";
-import { supabase } from "./📁 supabaseClient"; // adjust path if needed
+import { supabase } from "../lib/supabase";
 
 const JoinSection = () => {
   const ref = useRef(null);
@@ -18,7 +18,7 @@ const JoinSection = () => {
     e.preventDefault();
 
     const { data, error } = await supabase
-      .from("ehh_members")
+      .from("ehh_submissions")
       .insert([
         {
           full_name: fullName,
