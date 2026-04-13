@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 96%;
+    --foreground: 150 30% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 30% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 30% 8%;
+
+    --primary: 144 80% 22%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 122 39% 49%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 80 15% 92%;
+    --muted-foreground: 150 10% 40%;
+
+    --accent: 16 25% 47%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 120 10% 88%;
+    --input: 120 10% 88%;
+    --ring: 144 80% 22%;
+
+    --radius: 0.75rem;
+
+    --sky: 199 89% 64%;
+    --sky-foreground: 0 0% 100%;
+
+    --gradient-earth: linear-gradient(135deg, hsl(144 80% 22%), hsl(199 89% 64%));
+    --gradient-forest: linear-gradient(180deg, hsl(144 80% 22% / 0.9), hsl(144 80% 22% / 0.6));
+    --gradient-warm: linear-gradient(135deg, hsl(16 25% 47%), hsl(144 80% 22%));
+
+    --shadow-soft: 0 4px 24px -4px hsl(144 80% 22% / 0.1);
+    --shadow-elevated: 0 12px 40px -8px hsl(144 80% 22% / 0.15);
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .text-gradient-earth {
+    background: var(--gradient-earth);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .bg-gradient-earth {
+    background: var(--gradient-earth);
+  }
+  .bg-gradient-forest {
+    background: var(--gradient-forest);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
