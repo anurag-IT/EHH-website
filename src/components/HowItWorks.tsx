@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 const steps = [
   { num: "01", title: "Join EHH", desc: "Sign up and become part of Nepal's largest youth movement for humanity." },
@@ -8,7 +8,7 @@ const steps = [
   { num: "04", title: "Track Your Impact", desc: "See your real impact — trees planted, communities reached, lives changed." },
 ];
 
-const HowItWorks = () => {
+const HowItWorksComponent = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -52,4 +52,5 @@ const HowItWorks = () => {
   );
 };
 
+export const HowItWorks = React.memo(HowItWorksComponent);
 export default HowItWorks;
