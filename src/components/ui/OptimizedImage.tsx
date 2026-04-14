@@ -7,6 +7,7 @@ interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
   alt: string;
   className?: string;
   wrapperClassName?: string;
+  priority?: boolean;
 }
 
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
@@ -14,6 +15,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   alt, 
   className, 
   wrapperClassName, 
+  priority = false, // Add priority prop defaulting to false
   ...props 
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -26,7 +28,8 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       <img
         src={src}
         alt={alt}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"} // Eager load if it's high priority
+        {...(priority ? { fetchPriority: "high" } : {})} // Give it high fetch priority if needed
         decoding="async"
         onLoad={() => setIsLoaded(true)}
         className={cn(

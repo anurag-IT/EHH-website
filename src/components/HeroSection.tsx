@@ -16,6 +16,7 @@ const HeroSection = React.memo(() => {
           className="w-full h-full object-cover animate-ken-burns origin-bottom-right"
           width={1920}
           height={1080}
+          priority={true} // Prioritize loading for better LCP
         />
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/40 to-foreground/80" />
       </div>
