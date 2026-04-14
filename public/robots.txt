@@ -1,4 +1,18 @@
+# Standard Search Engines
 User-agent: *
+Allow: /
+
+# AI Crawlers & LLM Bots (Allowing for better AI indexing)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://ehh-nepal.netlify.app/sitemap.xml
