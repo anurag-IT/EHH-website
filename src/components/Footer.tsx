@@ -9,7 +9,7 @@ const Footer = React.memo(() => {
           <div>
             <div className="flex items-center gap-2 mb-6">
               <OptimizedImage
-                src="/logo.png"
+                src={import.meta.env.BASE_URL + "logo.png"}
                 alt="EHH Logo"
                 className="h-16 sm:h-20 w-auto object-contain"
               />

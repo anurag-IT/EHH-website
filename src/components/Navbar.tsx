@@ -32,7 +32,7 @@ const Navbar = React.memo(() => {
       <div className="container mx-auto flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6">
         <a href="#" className="flex items-center gap-2 group">
           <OptimizedImage
-            src="/logo.png"
+            src={import.meta.env.BASE_URL + "logo.png"}
             alt="EHH Logo"
             className="h-12 sm:h-16 w-auto object-contain hover:scale-105 transition-transform duration-300"
           />
