@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Heart } from "lucide-react";
 import React from "react";
-import heroBg from "@/assets/hero-bg.webp";
 import { OptimizedImage } from "./ui/OptimizedImage";
+
+const heroBg = "/hero-bg.webp";
 
 const HeroSection = React.memo(() => {
   return (

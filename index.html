@@ -10,7 +10,7 @@
     <meta name="author" content="EHH" />
 
     <!-- TODO: Update og:title to match your application name -->
-    
+    <link rel="preload" as="image" href="/hero-bg.webp" type="image/webp" crossorigin="anonymous" />
     
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/logo.webp">
@@ -25,7 +25,28 @@
 </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <style>
+        body { margin: 0; background-color: #0d160f; } /* Dark forest green to match the theme */
+        .initial-loader {
+          position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+          display: flex; align-items: center; justify-content: center;
+          z-index: 9999;
+          background: linear-gradient(180deg, rgba(13,22,15,1) 0%, rgba(20,38,24,1) 100%);
+        }
+        .spinner {
+          width: 48px; height: 48px;
+          border: 4px solid rgba(255, 255, 255, 0.1);
+          border-left-color: #4ade80; /* Theme secondary color */
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+      </style>
+      <div class="initial-loader">
+        <div class="spinner"></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
