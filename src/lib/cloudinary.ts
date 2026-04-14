@@ -16,7 +16,13 @@ export const optimizeCloudinaryUrl = (url: string, width?: number): string => {
     
     // Add essential auto-optimizations
     const transformations = ["f_auto", "q_auto"];
-    if (width) transformations.push(`w_${width}`);
+    
+    // If width is provided, use it; otherwise, use w_auto for responsive delivery
+    if (width) {
+      transformations.push(`w_${width}`);
+    } else {
+      transformations.push("w_auto");
+    }
     
     return `${urlParts[0]}/upload/${transformations.join(",")}/${urlParts[1]}`;
   } catch (error) {
