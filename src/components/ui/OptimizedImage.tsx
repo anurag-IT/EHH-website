@@ -28,7 +28,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
     : undefined;
 
   return (
-    <div className={cn("relative overflow-hidden bg-muted/20", wrapperClassName)}>
+    <div className={cn("relative overflow-hidden", wrapperClassName)}>
       <img
         src={finalSrc}
         srcSet={srcSet}
