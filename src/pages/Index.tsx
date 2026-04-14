@@ -1,7 +1,4 @@
-import React, { Suspense, useCallback } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/lib/supabase";
-
+import React, { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 
@@ -15,48 +12,29 @@ const GallerySection = React.lazy(() => import("@/components/GallerySection"));
 const Footer = React.lazy(() => import("@/components/Footer"));
 
 const Index = () => {
-  const queryClient = useQueryClient();
-
-  // ✅ GET data from Supabase using React Query
-  const { data: users, isLoading } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("users").select("*");
-      if (error) throw new Error(error.message);
-      return data;
-    },
-  });
-
-  // ✅ INSERT data using React Query Mutations
-  const addUserMutation = useMutation({
-    mutationFn: async (newUser: { name: string; email: string }) => {
-      const { data, error } = await supabase.from("users").insert([newUser]).select();
-      if (error) throw new Error(error.message);
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-    },
-  });
-
-  const handleAddUser = useCallback(() => {
-    addUserMutation.mutate({ name: "Anurag", email: "test@gmail.com" });
-  }, [addUserMutation]);
-
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative flex flex-col">
       <Navbar />
       <HeroSection />
 
-      <Suspense fallback={<div className="h-32 flex items-center justify-center">Loading section...</div>}>
-        <AboutSection />
-        <ProblemSection />
-        <SolutionSection />
-        <HowItWorks />
-        <ImpactSection />
-        <JoinSection />
-        <GallerySection />
-        <Footer />
+      <Suspense 
+        fallback={
+          <div className="h-64 flex flex-col items-center justify-center bg-background animate-pulse">
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+            <p className="mt-4 text-sm text-muted-foreground font-medium">Loading meaningful stories...</p>
+          </div>
+        }
+      >
+        <div className="flex flex-col">
+          <AboutSection />
+          <ProblemSection />
+          <SolutionSection />
+          <HowItWorks />
+          <ImpactSection />
+          <JoinSection />
+          <GallerySection />
+          <Footer />
+        </div>
       </Suspense>
     </div>
   );

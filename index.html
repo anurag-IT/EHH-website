@@ -9,8 +9,12 @@
     <meta name="description" content="EHH Project">
     <meta name="author" content="EHH" />
 
-    <!-- TODO: Update og:title to match your application name -->
-    <link rel="preload" as="image" href="/hero-bg.webp" type="image/webp" crossorigin="anonymous" />
+    <!-- Optimization: Preconnect to Cloudinary for faster image fetching -->
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+    
+    <!-- Critical: Preload hero background image with high priority -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp" type="image/webp" fetchpriority="high" />
     
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/logo.webp">
@@ -33,6 +37,7 @@
           display: flex; align-items: center; justify-content: center;
           z-index: 9999;
           background: linear-gradient(180deg, rgba(13,22,15,1) 0%, rgba(20,38,24,1) 100%);
+          transition: opacity 0.5s ease-out;
         }
         .spinner {
           width: 48px; height: 48px;
@@ -42,10 +47,21 @@
           animation: spin 1s linear infinite;
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        /* Instant Hero Paint */
+        .critical-hero-bg {
+          position: absolute;
+          top: 0; left: 0; width: 100%; height: 100vh;
+          background-image: url('https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp');
+          background-size: cover;
+          background-position: center bottom;
+          z-index: -1;
+        }
       </style>
-      <div class="initial-loader">
+      <div class="initial-loader" id="main-loader">
         <div class="spinner"></div>
       </div>
+      <div class="critical-hero-bg"></div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

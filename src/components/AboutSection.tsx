@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import studentsImg from "@/assets/students-planting.jpg";
+import { OptimizedImage } from "./ui/OptimizedImage";
+
+const studentsImg = "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776169283/students-planting_zyskxk.jpg";
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -57,11 +59,10 @@ const AboutSection = () => {
             className="relative"
           >
             <div className="rounded-2xl overflow-hidden shadow-elevated">
-              <img
+              <OptimizedImage
                 src={studentsImg}
                 alt="Students planting trees together"
                 className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover"
-                loading="lazy"
                 width={1024}
                 height={1024}
               />

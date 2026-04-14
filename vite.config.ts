@@ -20,13 +20,24 @@ export default defineConfig(({ mode }) => ({
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
   },
   build: {
-    target: "esnext", // Optimal for modern browsers
-    minify: "esbuild", // Faster and smaller
+    target: "esnext",
+    minify: "esbuild",
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 500, // Warn above 500kb
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          "ui-vendor": [
+            "@radix-ui/react-accordion",
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-dropdown-menu",
+            "@radix-ui/react-tooltip",
+            "lucide-react",
+          ],
+          "motion-vendor": ["framer-motion"],
+          "query-vendor": ["@tanstack/react-query"],
+        },
       },
     },
   },

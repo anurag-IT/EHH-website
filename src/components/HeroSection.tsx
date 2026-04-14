@@ -3,7 +3,7 @@ import { ArrowDown, Heart } from "lucide-react";
 import React from "react";
 import { OptimizedImage } from "./ui/OptimizedImage";
 
-const heroBg = "/hero-bg.webp";
+const heroBg = "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776168905/hero-bg_j8uqng.webp";
 
 const HeroSection = React.memo(() => {
   return (

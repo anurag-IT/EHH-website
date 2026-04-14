@@ -1,19 +1,34 @@
 import { motion, useInView } from "framer-motion";
 import React, { useRef } from "react";
-import gallery1 from "@/assets/gallery-3.webp";
-import gallery2 from "@/assets/gallery-2.webp";
-import gallery3 from "@/assets/gallery-1.webp";
-import studentsImg from "@/assets/students-planting.webp";
-import gallery_4 from "@/assets/gallery_4.webp";
 import { OptimizedImage } from "./ui/OptimizedImage";
 import { useIsMobile } from "../hooks/useIsMobile";
 
 const images = [
-  { src: gallery1, alt: "Terraced green hills of Nepal", span: "sm:col-span-2 sm:row-span-2" },
-  { src: gallery2, alt: "Hands planting a seedling", span: "" },
-  { src: gallery3, alt: "Students rallying for climate action", span: "" },
-  { src: studentsImg, alt: "Students planting trees together", span: "sm:col-span-2" },
-  { src: gallery_4, alt: "Digital expert earth day 10207040", span: "" },
+  { 
+    src: "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776169347/gallery-3_ixvriw.webp", 
+    alt: "Terraced green hills of Nepal", 
+    span: "sm:col-span-2 sm:row-span-2" 
+  },
+  { 
+    src: "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776169345/gallery-2_lnfuqt.webp", 
+    alt: "Hands planting a seedling", 
+    span: "" 
+  },
+  { 
+    src: "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776169344/gallery-1_dyd4ex.webp", 
+    alt: "Students rallying for climate action", 
+    span: "" 
+  },
+  { 
+    src: "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776169283/students-planting_zyskxk.jpg", 
+    alt: "Students planting trees together", 
+    span: "sm:col-span-2" 
+  },
+  { 
+    src: "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776169342/gallery_4_mi6az3.webp", 
+    alt: "Digital expert earth day 10207040", 
+    span: "" 
+  },
 ];
 
 const GallerySectionComponent = () => {
