@@ -14,7 +14,7 @@ const HeroSection = React.memo(() => {
           src={heroBg}
           alt="Nepal Himalayan landscape with students and nature"
           wrapperClassName="absolute inset-0 w-full h-full"
-          className="w-full h-full object-cover animate-ken-burns origin-bottom-right"
+          className="w-full h-full object-cover"
           width={1920}
           height={1080}
           priority={true} // Prioritize loading for better LCP
