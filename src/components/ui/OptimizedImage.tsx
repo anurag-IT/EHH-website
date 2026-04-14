@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
+import { optimizeCloudinaryUrl } from '@/lib/cloudinary';
 
 interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -19,6 +20,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   ...props 
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const finalSrc = optimizeCloudinaryUrl(src); // Ensure responsive Cloudinary format
 
   return (
     <div className={cn("relative overflow-hidden", wrapperClassName)}>
@@ -26,7 +28,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         <Skeleton className="absolute inset-0 w-full h-full" />
       )}
       <img
-        src={src}
+        src={finalSrc}
         alt={alt}
         loading={priority ? "eager" : "lazy"} // Eager load if it's high priority
         {...(priority ? { fetchPriority: "high" } : {})} // Give it high fetch priority if needed

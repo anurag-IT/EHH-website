@@ -1,45 +1,51 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { Heart } from "lucide-react";
+import React, { useRef, useState, useCallback } from "react";
+import { Heart, Loader2 } from "lucide-react";
 import { supabase } from "../lib/supabase";
 
-const JoinSection = () => {
+const JoinSectionComponent = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Prevents multi-click
 
-  // ✅ ADDED STATES (no UI change)
   const [fullName, setFullName] = useState("");
   const [school, setSchool] = useState("");
   const [district, setDistrict] = useState("");
 
-  // ✅ UPDATED HANDLE SUBMIT
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
-    const { data, error } = await supabase
-      .from("ehh_submissions")
-      .insert([
-        {
-          full_name: fullName,
-          school: school,
-          district: district,
-        },
-      ]);
+    setIsSubmitting(true);
+    try {
+      const { data, error } = await supabase
+        .from("ehh_submissions")
+        .insert([
+          {
+            full_name: fullName,
+            school: school,
+            district: district,
+          },
+        ]);
 
-    if (error) {
-      console.error("Insert Error:", error);
-      alert("Failed to submit");
-      return;
+      if (error) {
+        console.error("Insert Error:", error);
+        alert("Failed to submit");
+        return;
+      }
+
+      setSubmitted(true);
+      setFullName("");
+      setSchool("");
+      setDistrict("");
+    } catch (err) {
+      console.error("Server Error:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setSubmitted(true);
-
-    // optional reset
-    setFullName("");
-    setSchool("");
-    setDistrict("");
-  };
+  }, [fullName, school, district, isSubmitting]);
 
   return (
     <section id="join" className="py-16 sm:py-24 md:py-32 bg-card">
@@ -69,7 +75,7 @@ const JoinSection = () => {
               animate={{ opacity: 1, scale: 1 }}
               className="bg-primary/5 border border-primary/20 rounded-2xl p-8 sm:p-12 text-center"
             >
-              <Heart className="w-12 h-12 text-primary mx-auto mb-4" />
+              <Heart className="w-12 h-12 text-primary mx-auto mb-4 animate-pulse" />
               <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-2">
                 Welcome to EHH!
               </h3>
@@ -90,10 +96,11 @@ const JoinSection = () => {
                 <input
                   type="text"
                   required
+                  disabled={isSubmitting}
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Your name"
-                  className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow disabled:opacity-50"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
@@ -102,10 +109,11 @@ const JoinSection = () => {
                   <input
                     type="text"
                     required
+                    disabled={isSubmitting}
                     value={school}
                     onChange={(e) => setSchool(e.target.value)}
                     placeholder="Your school name"
-                    className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                    className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow disabled:opacity-50"
                   />
                 </div>
                 <div>
@@ -113,18 +121,21 @@ const JoinSection = () => {
                   <input
                     type="text"
                     required
+                    disabled={isSubmitting}
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)}
                     placeholder="Your district"
-                    className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                    className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow disabled:opacity-50"
                   />
                 </div>
               </div>
               <button
                 type="submit"
-                className="w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-base sm:text-lg hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-base sm:text-lg hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-70 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
               >
-                Join EHH Now
+                {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
+                {isSubmitting ? "Submitting..." : "Join EHH Now"}
               </button>
               <p className="text-center text-muted-foreground text-xs">
                 By joining, you're standing for humanity and our shared future 🌿
@@ -137,4 +148,5 @@ const JoinSection = () => {
   );
 };
 
+export const JoinSection = React.memo(JoinSectionComponent);
 export default JoinSection;
