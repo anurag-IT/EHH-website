@@ -39,7 +39,7 @@ const StatCard = ({ label, target, suffix, inView, delay }: {
       transition={{ duration: 0.6, delay }}
       className="text-center"
     >
-      <p className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-primary-foreground mb-2">
+      <p className="font-display text-3xl sm:text-5xl md:text-6xl font-bold text-primary-foreground mb-2">
         {count.toLocaleString()}{suffix}
       </p>
       <p className="text-primary-foreground/70 font-body text-xs sm:text-sm tracking-wide uppercase">{label}</p>
@@ -71,7 +71,7 @@ const ImpactSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-12">
           {stats.map((s, i) => (
             <StatCard key={s.label} {...s} inView={inView} delay={i * 0.1} />
           ))}

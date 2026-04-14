@@ -7,7 +7,7 @@ const heroBg = "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776168905/he
 
 const HeroSection = React.memo(() => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-background/5">
         <OptimizedImage
@@ -33,20 +33,20 @@ const HeroSection = React.memo(() => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 rounded-full px-5 py-2 mb-8"
+            className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 rounded-full px-4 sm:px-5 py-2 mb-6 sm:mb-8"
           >
-            <Heart className="w-4 h-4 text-secondary" />
-            <span className="text-primary-foreground/90 font-body text-xs sm:text-sm tracking-[0.15em] uppercase font-medium">
+            <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-secondary" />
+            <span className="text-primary-foreground/90 font-body text-[10px] sm:text-sm tracking-[0.1em] sm:tracking-[0.15em] uppercase font-medium">
               A Youth-Led Movement for Humanity
             </span>
           </motion.div>
 
-          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-[1.05] mb-6">
+          <h1 className="font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-[1.1] mb-4 sm:mb-6">
             For Humanity.
             <br />
             <span className="italic font-normal opacity-90">For Our Future.</span>
           </h1>
-          <p className="text-primary-foreground/80 font-body text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed px-2">
+          <p className="text-primary-foreground/80 font-body text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-1">
             Uniting students across Nepal to protect what matters most —
             our people, our planet, our shared future.
           </p>
@@ -56,7 +56,7 @@ const HeroSection = React.memo(() => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
+          className="flex flex-col xs:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
         >
           <a
             href="#join"
