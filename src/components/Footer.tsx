@@ -23,10 +23,10 @@ const Footer = React.memo(() => {
           <div>
             <h4 className="font-display font-bold text-primary-foreground mb-4">Quick Links</h4>
             <div className="flex flex-col gap-2">
-              {["About", "Our Beliefs", "Our Approach", "Impact", "Gallery"].map((l) => (
+              {["About", "Our Beliefs", "Our Approach", "Impact", "Gallery", "Our Team"].map((l) => (
                 <a
                   key={l}
-                  href={`#${l.toLowerCase().replace(/\s+/g, "").replace("our", "")}`}
+                  href={l === "Our Team" ? "#team" : `#${l.toLowerCase().replace(/\s+/g, "").replace("our", "")}`}
                   className="text-primary-foreground/60 hover:text-primary-foreground transition-colors text-sm"
                 >
                   {l}
