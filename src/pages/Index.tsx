@@ -9,6 +9,7 @@ const HowItWorks = React.lazy(() => import("@/components/HowItWorks"));
 const ImpactSection = React.lazy(() => import("@/components/ImpactSection"));
 const JoinSection = React.lazy(() => import("@/components/JoinSection"));
 const GallerySection = React.lazy(() => import("@/components/GallerySection"));
+const TeamSection = React.lazy(() => import("@/components/TeamSection"));
 const Footer = React.lazy(() => import("@/components/Footer"));
 
 const Index = () => {
@@ -31,8 +32,9 @@ const Index = () => {
           <SolutionSection />
           <HowItWorks />
           <ImpactSection />
-          <JoinSection />
           <GallerySection />
+          <TeamSection />
+          <JoinSection />
           <Footer />
         </div>
       </Suspense>
