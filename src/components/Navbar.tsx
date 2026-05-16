@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { OptimizedImage } from "./ui/OptimizedImage";
+import { Link } from "react-router-dom";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#problem", label: "Our Beliefs" },
-  { href: "#solution", label: "Our Approach" },
-  { href: "#impact", label: "Impact" },
-  { href: "#gallery", label: "Gallery" },
+  { href: "/#about", label: "About" },
+  { href: "/#problem", label: "Our Beliefs" },
+  { href: "/#solution", label: "Our Approach" },
+  { href: "/#impact", label: "Impact" },
+  { href: "/#gallery", label: "Gallery" },
+  { href: "/#team", label: "Our Team" },
 ];
 
 const Navbar = React.memo(() => {
@@ -30,28 +32,40 @@ const Navbar = React.memo(() => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6">
-        <a href="#" className="flex items-center gap-2 group">
+        <Link to="/" className="flex items-center gap-2 group">
           <OptimizedImage
             src={import.meta.env.BASE_URL + "logo.png"}
             alt="EHH Logo"
             className="h-12 sm:h-16 w-auto object-contain hover:scale-105 transition-transform duration-300"
           />
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
           {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className={`text-sm font-medium tracking-wide transition-colors hover:text-primary ${
-                scrolled ? "text-foreground" : "text-primary-foreground/90"
-              }`}
-            >
-              {l.label}
-            </a>
+            l.isPage ? (
+              <Link
+                key={l.href}
+                to={l.href}
+                className={`text-sm font-medium tracking-wide transition-colors hover:text-primary ${
+                  scrolled ? "text-foreground" : "text-primary-foreground/90"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.href}
+                href={l.href}
+                className={`text-sm font-medium tracking-wide transition-colors hover:text-primary ${
+                  scrolled ? "text-foreground" : "text-primary-foreground/90"
+                }`}
+              >
+                {l.label}
+              </a>
+            )
           ))}
           <a
-            href="#join"
+            href="/#join"
             className="bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300"
           >
             Join Now
@@ -81,17 +95,28 @@ const Navbar = React.memo(() => {
           >
             <div className="flex flex-col gap-1 p-4">
               {navLinks.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-foreground font-medium py-3 px-4 rounded-xl hover:bg-muted transition-colors active:bg-muted"
-                >
-                  {l.label}
-                </a>
+                l.isPage ? (
+                  <Link
+                    key={l.href}
+                    to={l.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-foreground font-medium py-3 px-4 rounded-xl hover:bg-muted transition-colors active:bg-muted"
+                  >
+                    {l.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-foreground font-medium py-3 px-4 rounded-xl hover:bg-muted transition-colors active:bg-muted"
+                  >
+                    {l.label}
+                  </a>
+                )
               ))}
               <a
-                href="#join"
+                href="/#join"
                 onClick={() => setMobileOpen(false)}
                 className="bg-primary text-primary-foreground px-5 py-3.5 rounded-xl text-center font-semibold mt-2 active:opacity-90"
               >
