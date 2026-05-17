@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 const Index = React.lazy(() => import("./pages/Index.tsx"));
+const FoundingMembers = React.lazy(() => import("./pages/FoundingMembers.tsx"));
 const NotFound = React.lazy(() => import("./pages/NotFound.tsx"));
 
 // Step 6: React Query Optimization
@@ -39,6 +40,7 @@ const App = () => (
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/founding-members" element={<FoundingMembers />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

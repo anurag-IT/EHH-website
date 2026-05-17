@@ -1,6 +1,8 @@
 import React, { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import FloatingButterflies from "@/components/home/FloatingButterflies";
+import ScrollBirds from "@/components/home/ScrollBirds";
 
 const AboutSection = React.lazy(() => import("@/components/AboutSection"));
 const ProblemSection = React.lazy(() => import("@/components/ProblemSection"));
@@ -15,6 +17,10 @@ const Footer = React.lazy(() => import("@/components/Footer"));
 const Index = () => {
   return (
     <div className="min-h-screen relative flex flex-col">
+      {/* Living world — homepage only, fixed overlay, never blocks clicks */}
+      <FloatingButterflies />
+      <ScrollBirds />
+
       <Navbar />
       <HeroSection />
 
