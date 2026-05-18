@@ -1,41 +1,78 @@
 import { useEffect, useRef } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
-import gsap from "gsap";
+
+interface BirdState {
+  x: number;
+  y: number;
+  speed: number;
+  wobblePhase: number;
+  wobbleSpeed: number;
+  delayFrames: number;
+}
 
 const birdData = [
-  { src: "/animations/bird1.json", yVh: 15, yDrift: -20, duration: 15, delay: 0,  size: 90 },
-  { src: "/animations/bird2.json", yVh: 35, yDrift:  25, duration: 20, delay: 8,  size: 500 },
-  { src: "/animations/bird2.json", yVh: 80, yDrift:  18, duration: 22, delay: 12, size: 420 },
+  { src: "/animations/bird1.json", baseSpeed: 2.0, size: 90 },
+  { src: "/animations/bird2.json", baseSpeed: 1.5, size: 500 },
+  { src: "/animations/bird2.json", baseSpeed: 1.8, size: 420 },
 ];
 
 const ScrollBirds = () => {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const activeBirds = isMobile ? birdData.slice(0, 2) : birdData;
+  const states = useRef<BirdState[]>([]);
+  const rafId = useRef<number>(0);
 
   useEffect(() => {
-    activeBirds.forEach((bird, i) => {
-      const el = refs.current[i];
-      if (!el) return;
+    const W = window.innerWidth;
+    const H = window.innerHeight;
 
-      gsap.fromTo(el,
-        {
-          x: "-30vw",
-          y: `${bird.yVh}vh`,
-        },
-        {
-          x: "110vw",
-          y: `calc(${bird.yVh}vh + ${bird.yDrift}px)`,
-          duration: bird.duration,
-          delay: bird.delay,
-          ease: "none",
-          repeat: -1,
+    // Initialize states with staggered start positions
+    states.current = activeBirds.map((bird, i) => ({
+      x: -300 - (Math.random() * 500) - (i * 400),
+      y: Math.random() * (H * 0.8) + (H * 0.1), // Random height between 10% and 90% of screen
+      speed: bird.baseSpeed + Math.random() * 0.5,
+      wobblePhase: Math.random() * Math.PI * 2,
+      wobbleSpeed: 0.01 + Math.random() * 0.01,
+      delayFrames: 0,
+    }));
+
+    const tick = () => {
+      const currentW = window.innerWidth;
+      const currentH = window.innerHeight;
+
+      activeBirds.forEach((bird, i) => {
+        const el = refs.current[i];
+        const s = states.current[i];
+        if (!el || !s) return;
+
+        if (s.delayFrames > 0) {
+          s.delayFrames--;
+          return;
         }
-      );
-    });
+
+        s.x += s.speed;
+        s.wobblePhase += s.wobbleSpeed;
+        // Add a gentle vertical wobble
+        const currentY = s.y + Math.sin(s.wobblePhase) * 20;
+
+        // When bird flies past the right edge, reset to the left with a new random Y
+        if (s.x > currentW + 300) {
+          s.x = -300;
+          s.y = Math.random() * (currentH * 0.8) + (currentH * 0.1);
+          s.delayFrames = 60 + Math.floor(Math.random() * 180); // 1-4 seconds delay before respawning
+        }
+
+        el.style.transform = `translate(${s.x}px, ${currentY}px)`;
+      });
+
+      rafId.current = requestAnimationFrame(tick);
+    };
+
+    rafId.current = requestAnimationFrame(tick);
 
     return () => {
-      gsap.killTweensOf(refs.current);
+      cancelAnimationFrame(rafId.current);
     };
   }, [activeBirds]);
 

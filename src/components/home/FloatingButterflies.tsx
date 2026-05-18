@@ -5,10 +5,12 @@ interface BState {
   x: number; y: number;
   vx: number; vy: number;
   rotation: number;
+  targetHeading: number;
+  headingChangeTimer: number;
   wobblePhase: number;
   wobbleSpeed: number;
   restFrames: number;
-  speed: number;
+  baseSpeed: number;
 }
 
 const CFG = [
@@ -31,16 +33,21 @@ const FloatingButterflies = () => {
     const M = 80; // margin from edges
 
     // Initialise one state object per butterfly
-    states.current = active.map(c => ({
-      x: c.sx, y: c.sy,
-      vx: (Math.random() - 0.5) * 2,
-      vy: (Math.random() - 0.5) * 2,
-      rotation: 0,
-      wobblePhase: Math.random() * Math.PI * 2,
-      wobbleSpeed: 0.018 + Math.random() * 0.018,
-      restFrames: 0,
-      speed: c.spd,
-    }));
+    states.current = active.map(c => {
+      const initialHeading = Math.random() * Math.PI * 2;
+      return {
+        x: c.sx, y: c.sy,
+        vx: Math.cos(initialHeading) * c.spd,
+        vy: Math.sin(initialHeading) * c.spd,
+        rotation: initialHeading * (180 / Math.PI) + 90,
+        targetHeading: initialHeading,
+        headingChangeTimer: Math.floor(Math.random() * 60),
+        wobblePhase: Math.random() * Math.PI * 2,
+        wobbleSpeed: 0.15 + Math.random() * 0.1, // Faster wobble for flapping effect
+        restFrames: 0,
+        baseSpeed: c.spd,
+      };
+    });
 
     // ONE shared loop — updates every butterfly in a single RAF callback
     const tick = () => {
@@ -50,39 +57,72 @@ const FloatingButterflies = () => {
         if (!el || !s) return;
 
         // Resting pause
-        if (s.restFrames > 0) { s.restFrames--; return; }
-        if (Math.random() < 0.003) { s.restFrames = 40 + Math.floor(Math.random() * 80); return; }
+        if (s.restFrames > 0) { 
+          s.restFrames--; 
+          return; 
+        }
+        if (Math.random() < 0.001) { 
+          s.restFrames = 30 + Math.floor(Math.random() * 60); 
+          return; 
+        }
 
-        // Wobble
-        s.wobblePhase += s.wobbleSpeed;
-        const wobble = Math.sin(s.wobblePhase) * 0.7;
+        s.headingChangeTimer--;
+        if (s.headingChangeTimer <= 0) {
+          // Pick a new target heading within -90 to 90 degrees of current heading
+          s.targetHeading += (Math.random() - 0.5) * Math.PI; 
+          s.headingChangeTimer = 40 + Math.floor(Math.random() * 80);
+        }
 
-        // Random nudge
-        s.vx += (Math.random() - 0.5) * 0.28;
-        s.vy += (Math.random() - 0.5) * 0.28 + wobble * 0.08;
+        // Current heading
+        const currentHeading = Math.atan2(s.vy, s.vx);
+        let diff = s.targetHeading - currentHeading;
+        
+        // Normalize diff to -PI to PI
+        while (diff > Math.PI) diff -= Math.PI * 2;
+        while (diff < -Math.PI) diff += Math.PI * 2;
+        
+        // Steer towards target heading (smooth turning)
+        const turnRate = 0.04;
+        const newHeading = currentHeading + Math.sign(diff) * Math.min(Math.abs(diff), turnRate);
+        
+        // Update velocity based on new heading and base speed
+        s.vx = Math.cos(newHeading) * s.baseSpeed;
+        s.vy = Math.sin(newHeading) * s.baseSpeed;
 
-        // Clamp speed
-        const spd = Math.hypot(s.vx, s.vy);
-        if (spd > s.speed) { s.vx = s.vx / spd * s.speed; s.vy = s.vy / spd * s.speed; }
-        if (spd < 0.4)     { s.vx += (Math.random() - 0.5) * 0.5; s.vy += (Math.random() - 0.5) * 0.5; }
+        // Boundary repulsion (soft push away from walls)
+        let boundaryTurn = false;
+        if (s.x < M)     { s.vx += 0.15; boundaryTurn = true; }
+        if (s.x > W - M) { s.vx -= 0.15; boundaryTurn = true; }
+        if (s.y < M)     { s.vy += 0.15; boundaryTurn = true; }
+        if (s.y > H - M) { s.vy -= 0.15; boundaryTurn = true; }
+        
+        if (boundaryTurn) {
+          // Normalize velocity to baseSpeed so it doesn't speed up against walls
+          const spd = Math.hypot(s.vx, s.vy);
+          s.vx = (s.vx / spd) * s.baseSpeed;
+          s.vy = (s.vy / spd) * s.baseSpeed;
+          // Overwrite target heading so it doesn't fight the boundary
+          s.targetHeading = Math.atan2(s.vy, s.vx);
+        }
 
+        // Apply movement
         s.x += s.vx;
-        s.y += s.vy + wobble;
+        s.y += s.vy;
 
-        // Boundary repulsion
-        if (s.x < M)     s.vx += 0.35;
-        if (s.x > W - M) s.vx -= 0.35;
-        if (s.y < M)     s.vy += 0.35;
-        if (s.y > H - M) s.vy -= 0.35;
+        // Flapping wobble (bobbing up and down perpendicular to motion is ideal, but Y is fine for subtle effects)
+        s.wobblePhase += s.wobbleSpeed;
+        const bounceY = Math.sin(s.wobblePhase) * 2.5;
 
-        // Smooth body rotation toward movement direction
-        const target = Math.atan2(s.vy, s.vx) * (180 / Math.PI);
-        let diff = target - s.rotation;
-        if (diff > 180) diff -= 360;
-        if (diff < -180) diff += 360;
-        s.rotation += diff * 0.07;
+        // Visual rotation: +90 degrees because Lottie butterflies face UP
+        const visualHeading = Math.atan2(s.vy, s.vx) * (180 / Math.PI) + 90;
+        
+        // Smoothly update s.rotation so it doesn't snap if it crosses 360/0
+        let rotDiff = visualHeading - s.rotation;
+        while (rotDiff > 180) rotDiff -= 360;
+        while (rotDiff < -180) rotDiff += 360;
+        s.rotation += rotDiff * 0.15;
 
-        el.style.transform = `translate(${s.x}px,${s.y}px) rotate(${s.rotation}deg)`;
+        el.style.transform = `translate(${s.x}px,${s.y + bounceY}px) rotate(${s.rotation}deg)`;
       });
 
       rafId.current = requestAnimationFrame(tick);
