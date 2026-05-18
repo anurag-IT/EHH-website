@@ -1,111 +1,108 @@
 import { Player } from "@lottiefiles/react-lottie-player";
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-const butterflyData = [
-  {
-    src: "/animations/butterfly1.json",
-    startX: 80,  startY: 150,
-    pathX: [80,  300, 150, 450, 80],
-    pathY: [150, 60,  280, 130, 150],
-    duration: 18, delay: 0, size: 50,
-  },
-  {
-    src: "/animations/butterfly2.json",
-    startX: 650, startY: 300,
-    pathX: [650, 450, 730, 500, 650],
-    pathY: [300, 180, 420, 260, 300],
-    duration: 23, delay: 5, size: 40,
-  },
-  {
-    src: "/animations/butterfly3.json",
-    startX: 300, startY: 500,
-    pathX: [300, 100, 420, 180, 300],
-    pathY: [500, 380, 620, 450, 500],
-    duration: 20, delay: 9, size: 35,
-  },
-  {
-    src: "/animations/butterfly1.json",
-    startX: 900, startY: 220,
-    pathX: [900, 700, 980, 750, 900],
-    pathY: [220, 120, 340, 190, 220],
-    duration: 26, delay: 3, size: 45,
-  },
-  {
-    src: "/animations/butterfly2.json",
-    startX: 500, startY: 680,
-    pathX: [500, 680, 380, 720, 500],
-    pathY: [680, 560, 800, 640, 680],
-    duration: 21, delay: 12, size: 30,
-  },
-  {
-    src: "/animations/butterfly3.json",
-    startX: 180, startY: 800,
-    pathX: [180, 380, 80,  450, 180],
-    pathY: [800, 680, 920, 760, 800],
-    duration: 24, delay: 7, size: 40,
-  },
-];
-
-interface ButterflyProps {
-  src: string;
-  startX: number;
-  startY: number;
-  pathX: number[];
-  pathY: number[];
-  duration: number;
-  delay: number;
-  size: number;
+interface BState {
+  x: number; y: number;
+  vx: number; vy: number;
+  rotation: number;
+  wobblePhase: number;
+  wobbleSpeed: number;
+  restFrames: number;
+  speed: number;
 }
 
-const FloatingButterfly = ({ src, startX, startY, pathX, pathY, duration, delay, size }: ButterflyProps) => {
-  const controls = useAnimation();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      controls.start({
-        x: pathX,
-        y: pathY,
-        transition: {
-          duration,
-          repeat: Infinity,
-          ease: "easeInOut",
-          times: [0, 0.25, 0.5, 0.75, 1],
-        },
-      });
-    }, delay * 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <motion.div
-      animate={controls}
-      className="pointer-events-none"
-      style={{
-        position: "fixed",
-        left: startX,
-        top: startY,
-        zIndex: 25,
-        willChange: "transform",
-      }}
-    >
-      <Player
-        autoplay
-        loop
-        src={src}
-        style={{ width: size, height: size }}
-      />
-    </motion.div>
-  );
-};
+const CFG = [
+  { src: "/animations/butterfly1.json", size: 50, sx: 200, sy: 200, spd: 2.2 },
+  { src: "/animations/butterfly2.json", size: 40, sx: 600, sy: 350, spd: 1.8 },
+  { src: "/animations/butterfly3.json", size: 35,  sx: 350, sy: 500, spd: 2.5 },
+];
 
 const FloatingButterflies = () => {
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const active = isMobile ? butterflyData.slice(0, 2) : butterflyData;
+  const active = isMobile ? CFG.slice(0, 2) : CFG;
+
+  const divRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const states  = useRef<BState[]>([]);
+  const rafId   = useRef<number>(0);
+
+  useEffect(() => {
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    const M = 80; // margin from edges
+
+    // Initialise one state object per butterfly
+    states.current = active.map(c => ({
+      x: c.sx, y: c.sy,
+      vx: (Math.random() - 0.5) * 2,
+      vy: (Math.random() - 0.5) * 2,
+      rotation: 0,
+      wobblePhase: Math.random() * Math.PI * 2,
+      wobbleSpeed: 0.018 + Math.random() * 0.018,
+      restFrames: 0,
+      speed: c.spd,
+    }));
+
+    // ONE shared loop — updates every butterfly in a single RAF callback
+    const tick = () => {
+      active.forEach((_, i) => {
+        const el = divRefs.current[i];
+        const s  = states.current[i];
+        if (!el || !s) return;
+
+        // Resting pause
+        if (s.restFrames > 0) { s.restFrames--; return; }
+        if (Math.random() < 0.003) { s.restFrames = 40 + Math.floor(Math.random() * 80); return; }
+
+        // Wobble
+        s.wobblePhase += s.wobbleSpeed;
+        const wobble = Math.sin(s.wobblePhase) * 0.7;
+
+        // Random nudge
+        s.vx += (Math.random() - 0.5) * 0.28;
+        s.vy += (Math.random() - 0.5) * 0.28 + wobble * 0.08;
+
+        // Clamp speed
+        const spd = Math.hypot(s.vx, s.vy);
+        if (spd > s.speed) { s.vx = s.vx / spd * s.speed; s.vy = s.vy / spd * s.speed; }
+        if (spd < 0.4)     { s.vx += (Math.random() - 0.5) * 0.5; s.vy += (Math.random() - 0.5) * 0.5; }
+
+        s.x += s.vx;
+        s.y += s.vy + wobble;
+
+        // Boundary repulsion
+        if (s.x < M)     s.vx += 0.35;
+        if (s.x > W - M) s.vx -= 0.35;
+        if (s.y < M)     s.vy += 0.35;
+        if (s.y > H - M) s.vy -= 0.35;
+
+        // Smooth body rotation toward movement direction
+        const target = Math.atan2(s.vy, s.vx) * (180 / Math.PI);
+        let diff = target - s.rotation;
+        if (diff > 180) diff -= 360;
+        if (diff < -180) diff += 360;
+        s.rotation += diff * 0.07;
+
+        el.style.transform = `translate(${s.x}px,${s.y}px) rotate(${s.rotation}deg)`;
+      });
+
+      rafId.current = requestAnimationFrame(tick);
+    };
+
+    rafId.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId.current);
+  }, []);
+
   return (
     <>
       {active.map((b, i) => (
-        <FloatingButterfly key={i} {...b} />
+        <div
+          key={i}
+          ref={el => { divRefs.current[i] = el; }}
+          className="pointer-events-none"
+          style={{ position: "fixed", top: 0, left: 0, zIndex: 25, willChange: "transform" }}
+        >
+          <Player autoplay loop src={b.src} style={{ width: b.size, height: b.size }} />
+        </div>
       ))}
     </>
   );

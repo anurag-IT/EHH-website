@@ -1,6 +1,19 @@
 [[headers]]
+  for = "/*.br"
+  [headers.values]
+    Content-Encoding = "br"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.gz"
+  [headers.values]
+    Content-Encoding = "gzip"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
   for = "/*"
   [headers.values]
+    Link = "</fonts>; rel=preconnect; crossorigin, <https://res.cloudinary.com>; rel=preconnect"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"

@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +8,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 const Index = React.lazy(() => import("./pages/Index.tsx"));
 const FoundingMembers = React.lazy(() => import("./pages/FoundingMembers.tsx"));
 const NotFound = React.lazy(() => import("./pages/NotFound.tsx"));
+
+const FloatingButterflies = React.lazy(() => import("@/components/home/FloatingButterflies"));
+const ScrollBirds         = React.lazy(() => import("@/components/home/ScrollBirds"));
 
 // Step 6: React Query Optimization
 const queryClient = new QueryClient({
@@ -30,12 +33,31 @@ const LoadingFallback = () => (
   </div>
 );
 
+const GlobalAnimations = () => {
+  const [showAnimations, setShowAnimations] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowAnimations(true), 1500);
+    return () => clearTimeout(t);
+  }, []);
+
+  if (!showAnimations) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <FloatingButterflies />
+      <ScrollBirds />
+    </Suspense>
+  );
+};
+
 const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <GlobalAnimations />
         <BrowserRouter basename="/" future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Suspense fallback={<LoadingFallback />}>
             <Routes>

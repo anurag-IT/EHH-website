@@ -1,21 +1,21 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import viteCompression from "vite-plugin-compression";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   base: "/",
   server: {
     port: 8080,
-    hmr: {
-      overlay: false,
-    },
+    hmr: { overlay: false },
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteCompression({ algorithm: "brotliCompress", ext: ".br" }),
+    viteCompression({ algorithm: "gzip", ext: ".gz" }),
+  ],
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+    alias: { "@": path.resolve(__dirname, "./src") },
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
   },
   build: {
@@ -26,14 +26,12 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          "react-vendor": ["react", "react-dom", "react-router-dom"],
-          "ui-vendor": [
-            "@radix-ui/react-dialog",
-            "@radix-ui/react-tooltip",
-            "lucide-react",
-          ],
+          "react-vendor":  ["react", "react-dom", "react-router-dom"],
+          "ui-vendor":     ["@radix-ui/react-dialog", "@radix-ui/react-tooltip", "lucide-react"],
           "motion-vendor": ["framer-motion"],
-          "query-vendor": ["@tanstack/react-query"],
+          "query-vendor":  ["@tanstack/react-query"],
+          "lottie-vendor": ["@lottiefiles/react-lottie-player"],
+          "gsap-vendor":   ["gsap"],
         },
       },
     },

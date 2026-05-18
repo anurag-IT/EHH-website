@@ -56,12 +56,14 @@ const ScrollBirds = () => {
               willChange: "transform",
             }}
           >
-            <Player
-              autoplay
-              loop
-              src={bird.src}
-              style={{ width: finalSize, height: finalSize * 0.6 }}
-            />
+            <div style={{ transform: bird.src.includes("bird1") ? "scaleX(-1)" : "none" }}>
+              <Player
+                autoplay
+                loop
+                src={bird.src}
+                style={{ width: finalSize, height: finalSize * 0.6 }}
+              />
+            </div>
           </div>
         );
       })}
