@@ -31,6 +31,24 @@ const founders = [
     bio: "The operational engine of EHH Nepal, Sameer ensures that vision becomes reality on the ground. He oversees day-to-day operations, community coordination, and execution of programs across Nepal's districts.",
     color: "bg-primary/80",
   },
+  {
+    name: "Abhishek Panjiyar",
+    role: "Chief Sanitation & Environmental Hygiene Officer (CSEHO)",
+    initials: "AP",
+    badge: "Team Member",
+    image: "https://res.cloudinary.com/dbfknoyxl/image/upload/v1779202435/c9356f7c-c312-4458-b0e5-4434011f1682_wgmcbu.png",
+    bio: "The cleanliness champion of EHH Nepal, our CSEHO leads all sanitation drives, waste management campaigns, and environmental hygiene initiatives across communities. From organizing public clean-up events to building awareness on proper waste disposal, they ensure that a healthier, cleaner Nepal becomes more than just a vision.",
+    color: "bg-secondary/80",
+  },
+  {
+    name: "Bipin Kumar Mandal",
+    role: "Chief Victim Response & Humanitarian Relief Officer (CVRHRO)",
+    initials: "BKM",
+    badge: "Team Member",
+    image: "https://res.cloudinary.com/dbfknoyxl/image/upload/v1779202431/157308af-7ddb-42dd-809b-929406c1bb57_g4biau.png",
+    bio: "The compassionate force behind EHH Nepal's crisis response, our CVRHRO heads the Victim Response Team — mobilizing rapid humanitarian aid, coordinating emergency relief operations, and standing beside vulnerable communities in their most critical moments. They ensure no one is left behind when disaster strikes.",
+    color: "bg-primary/60",
+  },
 ];
 
 const SectionWrapper = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
@@ -74,7 +92,7 @@ const FoundingMembers = () => {
 
         {/* Founders Grid */}
         <section className="container mx-auto px-4 mb-32">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {founders.map((founder, index) => (
               <motion.div
                 key={founder.name}
