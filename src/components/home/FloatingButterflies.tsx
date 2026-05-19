@@ -122,7 +122,7 @@ const FloatingButterflies = () => {
         while (rotDiff < -180) rotDiff += 360;
         s.rotation += rotDiff * 0.15;
 
-        el.style.transform = `translate(${s.x}px,${s.y + bounceY}px) rotate(${s.rotation}deg)`;
+        el.style.transform = `translate3d(${s.x}px,${s.y + bounceY}px,0) rotate(${s.rotation}deg)`;
       });
 
       rafId.current = requestAnimationFrame(tick);
@@ -139,9 +139,23 @@ const FloatingButterflies = () => {
           key={i}
           ref={el => { divRefs.current[i] = el; }}
           className="pointer-events-none"
-          style={{ position: "fixed", top: 0, left: 0, zIndex: 25, willChange: "transform" }}
+          style={{ 
+            position: "fixed", 
+            top: 0, 
+            left: 0, 
+            zIndex: 25, 
+            willChange: "transform",
+            contain: "layout paint"
+          }}
         >
-          <Player autoplay loop src={b.src} style={{ width: b.size, height: b.size }} />
+          <Player 
+            autoplay 
+            loop 
+            src={b.src} 
+            style={{ width: b.size, height: b.size }}
+            renderer="canvas"
+            rendererSettings={{ preserveAspectRatio: 'xMidYMid slice', clearCanvas: true }}
+          />
         </div>
       ))}
     </>

@@ -63,7 +63,7 @@ const ScrollBirds = () => {
           s.delayFrames = 60 + Math.floor(Math.random() * 180); // 1-4 seconds delay before respawning
         }
 
-        el.style.transform = `translate(${s.x}px, ${currentY}px)`;
+        el.style.transform = `translate3d(${s.x}px, ${currentY}px, 0)`;
       });
 
       rafId.current = requestAnimationFrame(tick);
@@ -91,6 +91,7 @@ const ScrollBirds = () => {
               left: 0,
               zIndex: 24,
               willChange: "transform",
+              contain: "layout paint"
             }}
           >
             <div style={{ transform: bird.src.includes("bird1") ? "scaleX(-1)" : "none" }}>
@@ -99,6 +100,8 @@ const ScrollBirds = () => {
                 loop
                 src={bird.src}
                 style={{ width: finalSize, height: finalSize * 0.6 }}
+                renderer="canvas"
+                rendererSettings={{ preserveAspectRatio: 'xMidYMid slice', clearCanvas: true }}
               />
             </div>
           </div>
