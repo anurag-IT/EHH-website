@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import React, { useRef } from "react";
 import { OptimizedImage } from "./ui/OptimizedImage";
-import { useIsMobile } from "../hooks/useIsMobile";
+import { useIsMobile } from "../hooks/use-mobile";
 
 const images = [
   { 

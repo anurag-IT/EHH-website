@@ -22,17 +22,45 @@ const JoinSectionComponent = () => {
     e.preventDefault();
     if (isSubmitting) return;
 
+    if (!navigator.onLine) {
+      toast.error("You appear to be offline. Please check your internet connection.");
+      return;
+    }
+
+    const trimmedName = fullName.trim();
+    const trimmedSchool = school.trim();
+    const trimmedDistrict = district.trim();
+
+    if (trimmedName.length < 2) {
+      toast.error("Please enter your full name (at least 2 characters)");
+      return;
+    }
+    if (trimmedSchool.length < 2) {
+      toast.error("Please enter your school name (at least 2 characters)");
+      return;
+    }
+    if (trimmedDistrict.length < 2) {
+      toast.error("Please enter your district (at least 2 characters)");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      const { error } = await supabase
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("Request timed out. Please try again.")), 15000)
+      );
+
+      const supabasePromise = supabase
         .from("ehh_submissions")
         .insert([
           {
-            full_name: fullName,
-            school: school,
-            district: district,
+            full_name: trimmedName,
+            school: trimmedSchool,
+            district: trimmedDistrict,
           },
         ]);
+
+      const { error } = await Promise.race([supabasePromise, timeoutPromise]);
 
       if (error) {
         console.error("Insert Error:", error);
@@ -48,11 +76,17 @@ const JoinSectionComponent = () => {
       
     } catch (err) {
       console.error("Server Error:", err);
-      toast.error("Something went wrong. Please check your connection.");
+      if (err instanceof TypeError && err.message === "Failed to fetch") {
+        toast.error("Connection failed. Please check your internet and try again.");
+      } else if (err instanceof Error && err.message === "Request timed out. Please try again.") {
+        toast.error(err.message);
+      } else {
+        toast.error("Something went wrong. Please check your connection.");
+      }
     } finally {
       setIsSubmitting(false);
     }
-  }, [fullName, school, district, isSubmitting]);
+  }, [fullName, school, district]);
 
   return (
     <section id="join" className="py-16 sm:py-24 md:py-32 bg-card">

@@ -4,13 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { OptimizedImage } from "./ui/OptimizedImage";
 import { Link } from "react-router-dom";
 
-const navLinks = [
-  { href: "/#about", label: "About" },
-  { href: "/#problem", label: "Our Beliefs" },
-  { href: "/#solution", label: "Our Approach" },
-  { href: "/#impact", label: "Impact" },
-  { href: "/#gallery", label: "Gallery" },
-  { href: "/#team", label: "Our Team" },
+const navLinks: { href: string; label: string; isPage: boolean }[] = [
+  { href: "/#about", label: "About", isPage: false },
+  { href: "/#problem", label: "Our Beliefs", isPage: false },
+  { href: "/#solution", label: "Our Approach", isPage: false },
+  { href: "/#impact", label: "Impact", isPage: false },
+  { href: "/#gallery", label: "Gallery", isPage: false },
+  { href: "/#team", label: "Our Team", isPage: false },
 ];
 
 const Navbar = React.memo(() => {
@@ -41,18 +41,21 @@ const Navbar = React.memo(() => {
         </Link>
 
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          {navLinks.map((l) => (
-            l.isPage ? (
-              <Link
-                key={l.href}
-                to={l.href}
-                className={`text-sm font-medium tracking-wide transition-colors hover:text-primary ${
-                  scrolled ? "text-foreground" : "text-primary-foreground/90"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ) : (
+          {navLinks.map((l) => {
+            if (l.isPage) {
+              return (
+                <Link
+                  key={l.href}
+                  to={l.href}
+                  className={`text-sm font-medium tracking-wide transition-colors hover:text-primary ${
+                    scrolled ? "text-foreground" : "text-primary-foreground/90"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              );
+            }
+            return (
               <a
                 key={l.href}
                 href={l.href}
@@ -62,8 +65,8 @@ const Navbar = React.memo(() => {
               >
                 {l.label}
               </a>
-            )
-          ))}
+            );
+          })}
           <a
             href="/#join"
             className="bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300"
@@ -94,17 +97,20 @@ const Navbar = React.memo(() => {
             className="md:hidden bg-card/98 backdrop-blur-lg border-t border-border overflow-hidden"
           >
             <div className="flex flex-col gap-1 p-4">
-              {navLinks.map((l) => (
-                l.isPage ? (
-                  <Link
-                    key={l.href}
-                    to={l.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-foreground font-medium py-3 px-4 rounded-xl hover:bg-muted transition-colors active:bg-muted"
-                  >
-                    {l.label}
-                  </Link>
-                ) : (
+              {navLinks.map((l) => {
+                if (l.isPage) {
+                  return (
+                    <Link
+                      key={l.href}
+                      to={l.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="text-foreground font-medium py-3 px-4 rounded-xl hover:bg-muted transition-colors active:bg-muted"
+                    >
+                      {l.label}
+                    </Link>
+                  );
+                }
+                return (
                   <a
                     key={l.href}
                     href={l.href}
@@ -113,8 +119,8 @@ const Navbar = React.memo(() => {
                   >
                     {l.label}
                   </a>
-                )
-              ))}
+                );
+              })}
               <a
                 href="/#join"
                 onClick={() => setMobileOpen(false)}

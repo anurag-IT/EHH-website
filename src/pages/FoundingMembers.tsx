@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -27,7 +27,6 @@ const founders = [
     role: "Co-Founder & Chief Operations Officer (COO)",
     initials: "SY",
     badge: "Co-Founder",
-    image: "/sameer.png",
     bio: "The operational engine of EHH Nepal, Sameer ensures that vision becomes reality on the ground. He oversees day-to-day operations, community coordination, and execution of programs across Nepal's districts.",
     color: "bg-primary/80",
   },
@@ -69,6 +68,16 @@ const SectionWrapper = ({ children, className = "" }: { children: React.ReactNod
 };
 
 const FoundingMembers = () => {
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  const handleImageError = (name: string) => {
+    setFailedImages(prev => {
+      const next = new Set(prev);
+      next.add(name);
+      return next;
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -106,11 +115,12 @@ const FoundingMembers = () => {
                 <div className="p-8 flex flex-col items-center text-center">
                   <div className="relative mb-6">
                     <div className={`w-24 h-24 rounded-full overflow-hidden ${founder.color} flex items-center justify-center text-white text-3xl font-display font-bold shadow-lg`}>
-                      {founder.image ? (
+                      {founder.image && !failedImages.has(founder.name) ? (
                         <img 
                           src={founder.image} 
                           alt={founder.name} 
                           className="w-full h-full object-cover"
+                          onError={() => handleImageError(founder.name)}
                         />
                       ) : (
                         founder.initials

@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error:", error, errorInfo);
+    console.error("Uncaught error:", error, "Component Stack:", errorInfo.componentStack);
   }
 
   public render() {
@@ -34,12 +34,20 @@ export class ErrorBoundary extends Component<Props, State> {
           <p className="text-muted-foreground mb-6 max-w-md">
             We've encountered an unexpected issue while loading this page. Our team has been notified.
           </p>
-          <button
-            className="bg-primary text-primary-foreground px-6 py-2 rounded-xl"
-            onClick={() => window.location.reload()}
-          >
-            Refresh Page
-          </button>
+          <div className="flex gap-4 justify-center">
+            <button
+              className="bg-primary text-primary-foreground px-6 py-2 rounded-xl font-medium hover:opacity-90 transition-opacity"
+              onClick={() => this.setState({ hasError: false, error: undefined })}
+            >
+              Try Again
+            </button>
+            <button
+              className="bg-secondary text-secondary-foreground px-6 py-2 rounded-xl font-medium hover:opacity-90 transition-opacity"
+              onClick={() => window.location.reload()}
+            >
+              Refresh Page
+            </button>
+          </div>
         </div>
       );
     }

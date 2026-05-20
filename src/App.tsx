@@ -45,8 +45,12 @@ const GlobalAnimations = () => {
 
   return (
     <Suspense fallback={null}>
-      <FloatingButterflies />
-      <ScrollBirds />
+      <ErrorBoundary fallback={null}>
+        <FloatingButterflies />
+      </ErrorBoundary>
+      <ErrorBoundary fallback={null}>
+        <ScrollBirds />
+      </ErrorBoundary>
     </Suspense>
   );
 };
