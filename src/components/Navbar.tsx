@@ -11,6 +11,7 @@ const navLinks: { href: string; label: string; isPage: boolean }[] = [
   { href: "/#impact", label: "Impact", isPage: false },
   { href: "/#gallery", label: "Gallery", isPage: false },
   { href: "/#team", label: "Our Team", isPage: false },
+  { href: "/blog", label: "Blog", isPage: true },
 ];
 
 const Navbar = React.memo(() => {

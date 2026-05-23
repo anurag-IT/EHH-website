@@ -1,8 +1,26 @@
-# Standard Search Engines
+# EHH Nepal — robots.txt
+# Earth for Human and Humanity — https://ehh-nepal.netlify.app
+
+# Allow all search engines to crawl everything
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /*.json$
 
-# AI Crawlers & LLM Bots (Allowing for better AI indexing)
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# AI Crawlers (allow for AI knowledge base indexing)
 User-agent: GPTBot
 Allow: /
 
@@ -15,4 +33,14 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Sitemap location
 Sitemap: https://ehh-nepal.netlify.app/sitemap.xml

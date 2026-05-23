@@ -3,89 +3,209 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Preconnect to critical origins for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+
+    <!-- Favicons -->
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="shortcut icon" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
-    <title>EHH Nepal | Earth for Human and Humanity | Environmental & Humanitarian Support</title>
-    <meta name="description" content="EHH Nepal (Earth for Human and Humanity) is the leading youth-led initiative across 77 districts of Nepal. Founded by Aayush Jha, Anurag, and Sameer Yadav. Empowering students for climate action, sustainability, and humanitarian aid." />
+
+    <!-- Primary SEO -->
+    <title>EHH Nepal | Earth for Human and Humanity | Youth Environmental Movement Across 77 Districts</title>
+    <meta name="description" content="EHH Nepal (Earth for Human and Humanity) is Nepal's leading youth-led environmental and humanitarian movement, uniting students across all 77 districts. Founded by Aayush Jha, Anurag Thakur, and Sameer Yadav. Join us for tree plantation, climate action, and community service." />
+    <meta name="keywords" content="EHH Nepal, Earth for Human and Humanity, Aayush Jha EHH, Anurag Thakur EHH, Sameer Yadav EHH, Nepal youth movement, environmental sustainability Nepal, humanitarian help Nepal, student climate action Nepal, 77 districts Nepal movement, tree plantation Nepal, climate change Nepal youth, environmental NGO Nepal, youth volunteer Nepal, green Nepal, eco Nepal students" />
     <meta name="author" content="Aayush Jha, Anurag Thakur, Sameer Yadav, EHH Nepal" />
-    <meta name="keywords" content="EHH Nepal, Earth for Human and Humanity, Aayush Jha, Sameer Yadav, Anurag EHH, Nepal youth movement, environmental sustainability Nepal, humanitarian help Nepal, student climate action Nepal, 77 districts movement" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="geo.region" content="NP" />
+    <meta name="geo.country" content="Nepal" />
+    <meta name="geo.placename" content="Nepal" />
+
+    <!-- Canonical — update this to your .com domain when you buy it -->
     <link rel="canonical" href="https://ehh-nepal.netlify.app/" />
 
-    <!-- AI & Global Identification Tags -->
+    <!-- App identity -->
     <meta property="og:site_name" content="EHH Nepal" />
     <meta name="apple-mobile-web-app-title" content="EHH Nepal" />
     <meta name="application-name" content="EHH Nepal" />
+    <meta name="theme-color" content="#166534" />
 
-    <!-- Optimization: Preconnect to Cloudinary for faster image fetching -->
-    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
-    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-    
     <!-- Critical: Preload hero background image with high priority -->
     <link rel="preload" as="image" href="https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp" type="image/webp" fetchpriority="high" />
-    
-    <!-- Open Graph (Facebook / LinkedIn) -->
+
+    <!-- Open Graph (Facebook / LinkedIn / WhatsApp) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ehh-nepal.netlify.app/" />
-    <meta property="og:title" content="EHH Nepal | Standing for Humanity and the Planet" />
-    <meta property="og:description" content="A student-led force across Nepal dedicated to environmental protection and humanitarian service. Explore our impact across 77 districts." />
+    <meta property="og:title" content="EHH Nepal | Earth for Human and Humanity | Nepal's Youth Environmental Movement" />
+    <meta property="og:description" content="A student-led force across Nepal's 77 districts dedicated to environmental protection and humanitarian service. Plant trees, fight climate change, and serve communities — join EHH Nepal." />
     <meta property="og:image" content="https://res.cloudinary.com/dbfknoyxl/image/upload/v1776168905/hero-bg_j8uqng.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="EHH Nepal — Earth for Human and Humanity, Nepal's youth environmental movement" />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
+    <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EHHNepal" />
+    <meta name="twitter:creator" content="@EHHNepal" />
     <meta name="twitter:url" content="https://ehh-nepal.netlify.app/" />
-    <meta name="twitter:title" content="EHH Nepal | Youth Movement for Humanity" />
-    <meta name="twitter:description" content="Uniting students across 77 districts of Nepal for climate action and humanitarian aid." />
+    <meta name="twitter:title" content="EHH Nepal | Youth Environmental Movement Across 77 Districts" />
+    <meta name="twitter:description" content="Uniting students across 77 districts of Nepal for climate action, tree plantation, and humanitarian aid. Join EHH Nepal — Earth for Human and Humanity." />
     <meta name="twitter:image" content="https://res.cloudinary.com/dbfknoyxl/image/upload/v1776168905/hero-bg_j8uqng.webp" />
+    <meta name="twitter:image:alt" content="EHH Nepal youth environmental movement" />
 
-    <!-- Advanced Structured Data (JSON-LD) for Google & AI LLMs -->
+    <!-- Comprehensive Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     [
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": "NGO",
         "@id": "https://ehh-nepal.netlify.app/#organization",
         "name": "EHH Nepal",
-        "alternateName": ["Earth for Human and Humanity", "EHH", "EHH Nepal Organization"],
+        "alternateName": ["Earth for Human and Humanity", "EHH", "EHH Nepal Organization", "Earth for Human and Humanity Nepal"],
         "url": "https://ehh-nepal.netlify.app/",
-        "logo": "https://ehh-nepal.netlify.app/logo.png",
-        "description": "EHH Nepal is a youth-led organization founded by Aayush Jha, dedicated to environmental sustainability and humanitarian action across all 77 districts of Nepal.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ehh-nepal.netlify.app/logo.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://res.cloudinary.com/dbfknoyxl/image/upload/v1776168905/hero-bg_j8uqng.webp",
+        "description": "EHH Nepal is a youth-led NGO founded in 2024, dedicated to environmental sustainability and humanitarian action across all 77 districts of Nepal. Founded by Aayush Jha, Sameer Yadav, and Anurag Thakur.",
         "foundingDate": "2024",
-        "knowsAbout": ["Climate Change", "Environmental Sustainability", "Humanitarian Aid", "Youth Empowerment", "Nepal"],
-        "address": { "@type": "PostalAddress", "addressCountry": "NP", "addressRegion": "Nepal" },
+        "numberOfEmployees": { "@type": "QuantitativeValue", "value": 200 },
+        "areaServed": { "@type": "Country", "name": "Nepal" },
+        "knowsAbout": ["Climate Change", "Environmental Sustainability", "Humanitarian Aid", "Youth Empowerment", "Tree Plantation Nepal", "Environmental Education Nepal"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "NP",
+          "addressRegion": "Nepal",
+          "addressLocality": "Nepal"
+        },
         "founder": [
-          { "@type": "Person", "name": "Aayush Jha", "jobTitle": "Founder & Chief Executive Officer" },
-          { "@type": "Person", "name": "Sameer Yadav", "jobTitle": "Co-Founder & Chief Operations Officer" },
-          { "@type": "Person", "name": "Anurag", "jobTitle": "Co-Founder & Chief Technology Officer" }
+          {
+            "@type": "Person",
+            "@id": "https://ehh-nepal.netlify.app/#aayush-jha",
+            "name": "Aayush Jha",
+            "jobTitle": "Founder & Chief Executive Officer",
+            "worksFor": { "@id": "https://ehh-nepal.netlify.app/#organization" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://ehh-nepal.netlify.app/#sameer-yadav",
+            "name": "Sameer Yadav",
+            "jobTitle": "Co-Founder & Chief Operations Officer",
+            "worksFor": { "@id": "https://ehh-nepal.netlify.app/#organization" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://ehh-nepal.netlify.app/#anurag-thakur",
+            "name": "Anurag Thakur",
+            "jobTitle": "Co-Founder & Chief Technology Officer",
+            "worksFor": { "@id": "https://ehh-nepal.netlify.app/#organization" }
+          }
         ],
-        "sameAs": ["https://www.facebook.com/EHHNepal", "https://twitter.com/EHHNepal", "https://www.instagram.com/EHHNepal"]
+        "sameAs": [
+          "https://www.facebook.com/EHHNepal",
+          "https://twitter.com/EHHNepal",
+          "https://www.instagram.com/EHHNepal"
+        ]
       },
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "@id": "https://ehh-nepal.netlify.app/#website",
         "url": "https://ehh-nepal.netlify.app/",
-        "name": "EHH Nepal",
+        "name": "EHH Nepal — Earth for Human and Humanity",
+        "description": "Official website of EHH Nepal, Nepal's youth-led environmental and humanitarian movement across 77 districts.",
         "publisher": { "@id": "https://ehh-nepal.netlify.app/#organization" },
-        "inLanguage": "en-US"
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://ehh-nepal.netlify.app/blog?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
       },
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ehh-nepal.netlify.app/" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ehh-nepal.netlify.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ehh-nepal.netlify.app/blog" },
+          { "@type": "ListItem", "position": 3, "name": "Founding Members", "item": "https://ehh-nepal.netlify.app/founding-members" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is EHH Nepal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EHH Nepal (Earth for Human and Humanity) is a youth-led environmental and humanitarian organization founded in 2024 by Aayush Jha, Sameer Yadav, and Anurag Thakur. We unite students across all 77 districts of Nepal for tree plantation, climate action, and community service."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I join EHH Nepal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can join EHH Nepal by visiting our website and filling out the registration form in the Join section. Membership is completely free and open to all students across Nepal's 77 districts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who founded EHH Nepal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EHH Nepal was founded in 2024 by Aayush Jha (CEO), Sameer Yadav (COO), and Anurag Thakur (CTO), along with other dedicated founding members."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does EHH Nepal do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EHH Nepal conducts tree plantation drives, environmental awareness campaigns, community clean-up events, humanitarian aid programs, and environmental education initiatives across all 77 districts of Nepal."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is EHH Nepal active in all 77 districts of Nepal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EHH Nepal's mission is to have active chapters in all 77 districts of Nepal. We are actively expanding and welcome students from every district to join and establish local chapters."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many trees has EHH Nepal planted?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EHH Nepal has planted over 2,500 trees across Nepal since its founding in 2024, offsetting approximately 34 tonnes of CO2. We aim to plant 77,000 trees — 1,000 per district — within three years."
+            }
+          }
         ]
       }
     ]
     </script>
-</head>
+  </head>
 
   <body>
     <div id="root">
       <style>
-        body { margin: 0; background-color: #0d160f; } /* Dark forest green to match the theme */
+        body { margin: 0; background-color: #0d160f; }
         .initial-loader {
           position: fixed; top: 0; left: 0; right: 0; bottom: 0;
           display: flex; align-items: center; justify-content: center;
@@ -96,13 +216,11 @@
         .spinner {
           width: 48px; height: 48px;
           border: 4px solid rgba(255, 255, 255, 0.1);
-          border-left-color: #4ade80; /* Theme secondary color */
+          border-left-color: #4ade80;
           border-radius: 50%;
           animation: spin 1s linear infinite;
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        /* Instant Hero Paint */
         .critical-hero-bg {
           position: absolute;
           top: 0; left: 0; width: 100%; height: 100vh;

@@ -1,3 +1,32 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# ─── Security & Performance Headers ───────────────────────────────────────────
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking
+    X-Frame-Options = "DENY"
+    # Prevent MIME sniffing
+    X-Content-Type-Options = "nosniff"
+    # Modern referrer policy (send origin on same-site, no referrer cross-site)
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Force HTTPS for 1 year, include subdomains, submit to preload list
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # Disable unnecessary browser features
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+    # Content Security Policy — tightened
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://res.cloudinary.com https://*.supabase.co; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co https://res.cloudinary.com; media-src 'none'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
+    # XSS Protection (legacy browsers)
+    X-XSS-Protection = "1; mode=block"
+    # Cross-Origin policies
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-site"
+
+# ─── Immutable Asset Caching (1 year) ─────────────────────────────────────────
+
 [[headers]]
   for = "/*.br"
   [headers.values]
@@ -9,18 +38,6 @@
   [headers.values]
     Content-Encoding = "gzip"
     Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Link = "</fonts>; rel=preconnect; crossorigin, <https://res.cloudinary.com>; rel=preconnect"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "no-referrer"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://res.cloudinary.com https://*.supabase.co; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co https://res.cloudinary.com https://lottiefiles.com https://cdnjs.cloudflare.com; frame-ancestors 'none'; upgrade-insecure-requests;"
 
 [[headers]]
   for = "/assets/*"
@@ -57,11 +74,36 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-[build]
-  command = "npm run build"
-  publish = "dist"
+# ─── Short Cache for HTML & Dynamic Files ─────────────────────────────────────
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# ─── SPA Routing (React Router) ───────────────────────────────────────────────
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+# ─── IMPORTANT: When you buy your .com domain ─────────────────────────────────
+# Uncomment and update the block below to redirect your Netlify URL to your .com:
+#
+# [[redirects]]
+#   from = "https://ehh-nepal.netlify.app/*"
+#   to = "https://www.ehhnepal.com/:splat"
+#   status = 301
+#   force = true

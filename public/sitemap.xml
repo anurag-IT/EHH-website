@@ -1,9 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Home Page -->
   <url>
     <loc>https://ehh-nepal.netlify.app/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dbfknoyxl/image/upload/v1776168905/hero-bg_j8uqng.webp</image:loc>
+      <image:title>EHH Nepal — Earth for Human and Humanity</image:title>
+    </image:image>
   </url>
+
+  <!-- Founding Members Page -->
+  <url>
+    <loc>https://ehh-nepal.netlify.app/founding-members</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Index -->
+  <url>
+    <loc>https://ehh-nepal.netlify.app/blog</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog Article: Youth Environmental Movement Nepal -->
+  <url>
+    <loc>https://ehh-nepal.netlify.app/blog/youth-environmental-movement-nepal</loc>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Blog Article: Climate Change Nepal Youth Action -->
+  <url>
+    <loc>https://ehh-nepal.netlify.app/blog/climate-change-nepal-youth-action</loc>
+    <lastmod>2024-12-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Blog Article: Tree Plantation Nepal -->
+  <url>
+    <loc>https://ehh-nepal.netlify.app/blog/tree-plantation-nepal</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Blog Article: How to Join EHH Nepal -->
+  <url>
+    <loc>https://ehh-nepal.netlify.app/blog/how-to-join-ehh-nepal</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Blog Article: Humanitarian Aid Nepal Students -->
+  <url>
+    <loc>https://ehh-nepal.netlify.app/blog/humanitarian-aid-nepal-students</loc>
+    <lastmod>2025-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Blog Article: Environmental Education Nepal Schools -->
+  <url>
+    <loc>https://ehh-nepal.netlify.app/blog/environmental-education-nepal-schools</loc>
+    <lastmod>2025-02-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
 </urlset>
