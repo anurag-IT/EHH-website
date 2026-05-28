@@ -14,6 +14,17 @@ const TreePlantationNepal = React.lazy(() => import("./pages/blog/TreePlantation
 const HowToJoinEHHNepal = React.lazy(() => import("./pages/blog/HowToJoinEHHNepal.tsx"));
 const HumanitarianAidNepal = React.lazy(() => import("./pages/blog/HumanitarianAidNepal.tsx"));
 const EnvironmentalEducationNepalSchools = React.lazy(() => import("./pages/blog/EnvironmentalEducationNepalSchools.tsx"));
+const DeforestationNepal = React.lazy(() => import("./pages/blog/DeforestationNepal.tsx"));
+const AirPollutionKathmandu = React.lazy(() => import("./pages/blog/AirPollutionKathmandu.tsx"));
+const WaterPollutionNepal = React.lazy(() => import("./pages/blog/WaterPollutionNepal.tsx"));
+const PlasticPollutionNepal = React.lazy(() => import("./pages/blog/PlasticPollutionNepal.tsx"));
+const BiodiversityNepal = React.lazy(() => import("./pages/blog/BiodiversityNepal.tsx"));
+const SustainableLivingNepal = React.lazy(() => import("./pages/blog/SustainableLivingNepal.tsx"));
+const ClimateChangeAgricultureNepal = React.lazy(() => import("./pages/blog/ClimateChangeAgricultureNepal.tsx"));
+const StartEnvironmentalClubSchoolNepal = React.lazy(() => import("./pages/blog/StartEnvironmentalClubSchoolNepal.tsx"));
+const NepalNationalParksConservation = React.lazy(() => import("./pages/blog/NepalNationalParksConservation.tsx"));
+const DisasterPreparednessNepal = React.lazy(() => import("./pages/blog/DisasterPreparednessNepal.tsx"));
+const RenewableEnergyNepal = React.lazy(() => import("./pages/blog/RenewableEnergyNepal.tsx"));
 const NotFound = React.lazy(() => import("./pages/NotFound.tsx"));
 
 const FloatingButterflies = React.lazy(() => import("@/components/home/FloatingButterflies"));
@@ -81,6 +92,17 @@ const App = () => (
               <Route path="/blog/how-to-join-ehh-nepal" element={<HowToJoinEHHNepal />} />
               <Route path="/blog/humanitarian-aid-nepal-students" element={<HumanitarianAidNepal />} />
               <Route path="/blog/environmental-education-nepal-schools" element={<EnvironmentalEducationNepalSchools />} />
+              <Route path="/blog/deforestation-nepal-causes-effects-solutions" element={<DeforestationNepal />} />
+              <Route path="/blog/air-pollution-kathmandu-nepal" element={<AirPollutionKathmandu />} />
+              <Route path="/blog/water-pollution-nepal-rivers" element={<WaterPollutionNepal />} />
+              <Route path="/blog/plastic-pollution-nepal-solutions" element={<PlasticPollutionNepal />} />
+              <Route path="/blog/biodiversity-nepal-wildlife-conservation" element={<BiodiversityNepal />} />
+              <Route path="/blog/sustainable-living-nepal-students" element={<SustainableLivingNepal />} />
+              <Route path="/blog/climate-change-agriculture-nepal" element={<ClimateChangeAgricultureNepal />} />
+              <Route path="/blog/start-environmental-club-school-nepal" element={<StartEnvironmentalClubSchoolNepal />} />
+              <Route path="/blog/nepal-national-parks-conservation" element={<NepalNationalParksConservation />} />
+              <Route path="/blog/disaster-preparedness-nepal-youth" element={<DisasterPreparednessNepal />} />
+              <Route path="/blog/renewable-energy-nepal-youth-advocacy" element={<RenewableEnergyNepal />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
