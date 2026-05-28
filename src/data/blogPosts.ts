@@ -10,8 +10,11 @@ export interface BlogPost {
   coverImage: string;
 }
 
+// All cover images: unique, topic-matched, high-quality Unsplash photos
+// URL format: https://images.unsplash.com/photo-{ID}?w=1200&h=630&fit=crop&q=85&auto=format
+
 export const blogPosts: BlogPost[] = [
-  // ── Batch 1 (original 6) ──────────────────────────────────────────────────
+  // ── Batch 1 ──────────────────────────────────────────────────────────────
   {
     slug: "youth-environmental-movement-nepal",
     title: "Youth Environmental Movements in Nepal: How EHH Nepal is Leading the Charge",
@@ -21,7 +24,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "8 min read",
     category: "Movement",
     keywords: "youth environmental movement Nepal, student climate action Nepal, EHH Nepal, environmental activism Nepal youth, climate movement Nepal",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Young people with raised fists / youth activists marching together
+    coverImage: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "climate-change-nepal-youth-action",
@@ -32,7 +36,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     category: "Climate",
     keywords: "climate change Nepal, climate crisis Nepal youth, glacier melting Nepal, environmental crisis Nepal, youth climate action Nepal",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Dramatic melting glacier / Himalayan ice — powerful climate visual
+    coverImage: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "tree-plantation-nepal",
@@ -43,7 +48,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     category: "Environment",
     keywords: "tree plantation Nepal, reforestation Nepal, Nepal forest restoration, plant trees Nepal, EHH Nepal trees, deforestation Nepal students",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Hands gently planting a green seedling in rich brown soil
+    coverImage: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "how-to-join-ehh-nepal",
@@ -54,7 +60,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "5 min read",
     category: "Guide",
     keywords: "join EHH Nepal, how to join environmental movement Nepal, student volunteer Nepal, environmental NGO Nepal join, youth movement Nepal register",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Students joining hands in a circle — teamwork and unity
+    coverImage: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "humanitarian-aid-nepal-students",
@@ -65,7 +72,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     category: "Humanitarian",
     keywords: "humanitarian aid Nepal, community service Nepal students, disaster relief Nepal youth, humanitarian work Nepal, EHH Nepal humanitarian",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Volunteers distributing food and aid — warm, powerful community image
+    coverImage: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "environmental-education-nepal-schools",
@@ -76,10 +84,11 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     category: "Education",
     keywords: "environmental education Nepal, green schools Nepal, sustainability education Nepal, eco-friendly schools Nepal, EHH Nepal schools",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Happy students outdoors, learning in nature with books
+    coverImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=630&fit=crop&q=85&auto=format",
   },
 
-  // ── Batch 2 (new 10) ──────────────────────────────────────────────────────
+  // ── Batch 2 ──────────────────────────────────────────────────────────────
   {
     slug: "deforestation-nepal-causes-effects-solutions",
     title: "Deforestation in Nepal: Causes, Effects, and How Students Are Fighting Back",
@@ -89,7 +98,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "8 min read",
     category: "Environment",
     keywords: "deforestation Nepal, Nepal forest loss, causes of deforestation Nepal, effects of deforestation Nepal, reforestation Nepal students, stop deforestation Nepal",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Stark deforested hillside with bare cut tree stumps — emotional impact
+    coverImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "air-pollution-kathmandu-nepal",
@@ -100,7 +110,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     category: "Climate",
     keywords: "air pollution Kathmandu Nepal, Kathmandu air quality, Nepal air pollution causes, air pollution health Nepal, clean air Nepal youth, pollution Nepal",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Dense industrial smog over a city — thick brown/grey haze, visible pollution
+    coverImage: "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "water-pollution-nepal-rivers",
@@ -111,7 +122,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     category: "Environment",
     keywords: "water pollution Nepal, river pollution Nepal, Bagmati river pollution, clean water Nepal, water conservation Nepal, Nepal river cleanup students",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Heavily polluted dark river with plastic and waste floating — stark reality
+    coverImage: "https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "plastic-pollution-nepal-solutions",
@@ -122,7 +134,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     category: "Environment",
     keywords: "plastic pollution Nepal, single use plastic Nepal, plastic free Nepal, plastic waste Nepal rivers, plastic ban Nepal, reduce plastic Nepal students",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Massive pile of colourful plastic bottles and single-use plastic waste
+    coverImage: "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "biodiversity-nepal-wildlife-conservation",
@@ -133,7 +146,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "8 min read",
     category: "Environment",
     keywords: "biodiversity Nepal, wildlife conservation Nepal, endangered species Nepal, Nepal national parks, snow leopard Nepal, one horned rhino Nepal, Bengal tiger Nepal",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Magnificent Bengal tiger staring directly into camera — powerful, stunning
+    coverImage: "https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "sustainable-living-nepal-students",
@@ -144,7 +158,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     category: "Guide",
     keywords: "sustainable living Nepal, eco-friendly Nepal students, green lifestyle Nepal, sustainability tips Nepal, reduce carbon footprint Nepal, zero waste Nepal",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Bright eco-friendly market with fresh produce, cloth bags, zero waste lifestyle
+    coverImage: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "climate-change-agriculture-nepal",
@@ -155,7 +170,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "8 min read",
     category: "Climate",
     keywords: "climate change agriculture Nepal, Nepal farming climate change, crop failure Nepal, food security Nepal, climate resilient farming Nepal, agriculture youth Nepal",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Farmer working in lush green terraced rice paddies — iconic Nepal farming scene
+    coverImage: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "start-environmental-club-school-nepal",
@@ -166,7 +182,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     category: "Guide",
     keywords: "environmental club school Nepal, eco club Nepal, green school initiative Nepal, school environment club Nepal, student environmental group Nepal, EHH Nepal school chapter",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Energetic students outdoors celebrating together with raised arms — positive, motivating
+    coverImage: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "nepal-national-parks-conservation",
@@ -177,7 +194,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "8 min read",
     category: "Environment",
     keywords: "Nepal national parks, conservation areas Nepal, Chitwan national park, Sagarmatha national park, Bardia national park, wildlife Nepal, conservation youth Nepal",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Snow-capped Himalayan mountain range with vast green valley — Nepal at its most majestic
+    coverImage: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "disaster-preparedness-nepal-youth",
@@ -188,7 +206,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     category: "Humanitarian",
     keywords: "disaster preparedness Nepal, earthquake preparedness Nepal, flood preparedness Nepal, community resilience Nepal youth, disaster relief Nepal students, EHH Nepal disaster",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Rescue workers in orange jackets helping flood-affected people — emotional and real
+    coverImage: "https://images.unsplash.com/photo-1583349136229-3e3c3f51e1b9?w=1200&h=630&fit=crop&q=85&auto=format",
   },
   {
     slug: "renewable-energy-nepal-youth-advocacy",
@@ -199,6 +218,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     category: "Climate",
     keywords: "renewable energy Nepal, solar energy Nepal, hydropower Nepal, green energy Nepal youth, clean energy Nepal, sustainable energy Nepal, energy Nepal students",
-    coverImage: "https://res.cloudinary.com/dbfknoyxl/image/upload/f_auto,q_auto/v1776168905/hero-bg_j8uqng.webp",
+    // Wide field of gleaming solar panels under bright blue sky — clean, hopeful, powerful
+    coverImage: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&h=630&fit=crop&q=85&auto=format",
   },
 ];
